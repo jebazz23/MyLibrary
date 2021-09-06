@@ -36,7 +36,6 @@ router.get('/new', async (req, res) => {
 
 // Create Book route
 router.post('/', async (req, res) => {
-  const fileName =  req.file != null ? req.file.filename : null
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
@@ -141,10 +140,9 @@ async function renderFormPage(res, book, form, hasError = false) {
                 params.errorMessage = "Error creating Book"
             }
         }
-        if (hasError) params.errorMessage = `Error editing Book`
         res.render(`books/${form}`, params)
     } catch (error) {
-        res.redirect('/book');
+        res.redirect('/books');
     }
 }
 

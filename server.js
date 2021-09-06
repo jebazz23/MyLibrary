@@ -7,12 +7,6 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
 
-// parse request data content type application/x-www-form-urlencoded
-app.use(express.urlencoded({ limit:'10mb', extended: false }));
-
-//parse request data content type application/json
-app.use(express.json());
-
 const indexRouter = require('./routes/index');
 const authorRouter = require('./routes/authors');
 const bookRouter = require('./routes/books');
@@ -23,6 +17,13 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
+
+
+// parse request data content type application/x-www-form-urlencoded
+app.use(express.urlencoded({ limit:'10mb', extended: false }));
+
+//parse request data content type application/json
+app.use(express.json());
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE_URL, {
